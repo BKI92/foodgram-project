@@ -5,12 +5,22 @@
 .custom-text-block {
   height: 10em;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
+}
+.custom-text-block-header {
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
 }
 
 .custom-button-block {
