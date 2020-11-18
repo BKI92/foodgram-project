@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} Рецепты {% endblock %} | Foodgram</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pages/index.css'">
+    <link rel="stylesheet" href="{% static 'pages/form.css' %}">
+    <link rel="stylesheet" href="{% static 'pages/myFollow.css' %}">
+    <link rel="stylesheet" href="{% static 'pages/shopList.css' %}">
+    <link rel="stylesheet" href="{% static 'pages/single.css' %}">
+    <link rel="stylesheet" href="{% static 'pages/single.css' %}">
+
+    <script src="../static/js/components/MainCards.js"></script>
+    <script src="../static/js/components/Purchases.js"></script>
+    <script src="../static/js/components/Favorites.js"></script>
+    <script src="../static/js/config/config.js"></script>
+    <script src="../static/js/components/CardList.js"></script>
+    <script src="../static/js/components/Header.js"></script>
+    <script src="../static/js/api/Api.js"></script>
+    <script src="../static/indexAuth.js"></script>
+</head>
+
+<body>
+    {% include 'header.html' %}
+    <main>
+        <div class="container">
+            {% block content %}
+                Здесь будет контент.
+            {% endblock content %}
+        </div>
+    </main>
+    {% include 'footer.html' %}
+    </body>
+</html>
+
