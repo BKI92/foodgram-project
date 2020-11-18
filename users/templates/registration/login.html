@@ -12,6 +12,7 @@
         <form class="form" method="post">
 
             {% csrf_token %}
+
             {% for field in form %}
 
             <div class="form__group">
@@ -22,6 +23,7 @@
             </div>
 
             {% endfor %}
+
             {% if form.errors %}
                 <span class="form__error">{{form.non_field_errors}}</span>
             {% endif %}
