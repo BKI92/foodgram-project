@@ -1,5 +1,9 @@
 <header class="header">
     {% block sidebar %}
-    {% include 'nav.html' %}
+        {% if user.is_authenticated  %}
+            {% include 'nav_auth.html' %}
+        {% else %}
+            {% include 'nav.html' %}
+        {% endif%}
     {% endblock %}
   </header>
