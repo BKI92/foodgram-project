@@ -6,6 +6,8 @@ User = get_user_model()
 
 class Tag(models.Model):
     title = models.CharField(unique=True, max_length=15)
+    style = models.CharField('Стиль', max_length=30, null=False, default="green")
+    slug = models.SlugField(max_length=15, unique=True, default="", null=False)
 
     def __str__(self):
         return self.title
@@ -27,7 +29,7 @@ class Recipe(models.Model):
     )
     title = models.CharField(unique=True, max_length=200)
     description = models.TextField(blank=False, verbose_name='Описание рецепта')
-    image = models.ImageField()
+    image = models.ImageField(upload_to='recipes/')
     ingredients = models.ManyToManyField(
         Ingredient,
         related_name='recipe_ingredient',
@@ -50,7 +52,7 @@ class Recipe(models.Model):
 
 
 class IngredientRecipes(models.Model):
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.DO_NOTHING)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     amount = models.IntegerField()
 
