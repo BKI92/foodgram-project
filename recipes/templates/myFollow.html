@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load user_filters %}
 {% block title %}Мои подписки{% endblock %}
 {% load static %}
 {% block content %}
@@ -9,7 +8,7 @@
         <h1 class="main__title">Мои подписки</h1>
     </div>
     <div class="card-list">
-        {% for follow, recipes in follow_recipes.items %}
+        {% for follow, recipes in page %}
         <div class="card-user" data-author="{{follow.author_id}}">
             <div class="card-user__header">
                 <h2 class="card-user__title">{{follow}}</h2>
@@ -20,10 +19,8 @@
                     <li class="card-user__item">
                         <div class="recipe">
                             {% load thumbnail %}
-                            {% thumbnail recipe.image "72x72" crop="center"
-                            upscale=True as im %}
-                            <img class="card-img" src="{{ im.url }}"
-                                 alt="какой-то-текст" class="recipe__image"/>
+                            {% thumbnail recipe.image "72x72" crop="center" upscale=True as im %}
+                            <img class="card-img" src="{{ im.url }}" alt="какой-то-текст" class="recipe__image"/>
                             {% endthumbnail %}
                             <h3 class="recipe__title">{{recipe.title}}</h3>
 
@@ -44,5 +41,9 @@
         </div>
         {%endfor%}
     </div>
+
+    {% if page.has_other_pages %}
+        {% include "paginator.html" with items=page paginator=paginator%}
+    {% endif %}
 </main>
 {%endblock%}
