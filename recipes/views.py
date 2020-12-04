@@ -19,12 +19,12 @@ def index(request):
 @login_required
 def my_follow(request, username):
     follows = Follow.objects.filter(user=request.user)
-    recipes = Recipe.objects.filter(author__in=follows.all().values_list(
-        'author_id')).order_by('-pub_date')
+    follow_recipes = [[follow.author, Recipe.objects.filter(author=follow.author).order_by('-pub_date')] for follow in follows]
+    paginator = Paginator(follow_recipes, 6)
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
     return render(
         request,
         template_name='MyFollow.html',
-        context={'username': username,
-                 'follows': follows,
-                 'recipes': recipes}
+        context={'follow_recipes': follow_recipes, 'page': page, 'paginator': paginator},
     )
