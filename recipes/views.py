@@ -9,21 +9,23 @@ from recipes.models import Recipe, Follow, User, Tag
 
 def index(request):
     search = request.GET.getlist('search')
+
     tags = Tag.objects.all()
     tags_list = tags_handler(search)
-    print(tags_list)
-    tags_link = generate_tag_links(tags_list)
+    tags_links = generate_tag_links(tags_list)
     tags_id_list = [tag.id for tag in tags.filter(slug__in=tags_list)]
     recipes = Recipe.objects.filter(tags__in=tags_id_list).distinct().order_by('-pub_date')
+
     paginator = Paginator(recipes, 2)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
+
     return render(
         request,
         template_name='index.html',
         context={'tags': tags,
                  'tags_list': tags_list,
-                 'tags_link': tags_link,
+                 'tags_links': tags_links,
                  'page': page,
                  'paginator': paginator
                  },

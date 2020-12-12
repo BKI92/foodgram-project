@@ -1,17 +1,6 @@
 from recipes.models import Tag
 
 
-def generate_tags_list(tag_slug, slugs_list, default_slugs):
-    if tag_slug in slugs_list:
-        slugs_list.remove(tag_slug)
-    else:
-        index = default_slugs.index(tag_slug)
-        if len(slugs_list) <= index:
-            slugs_list.append(tag_slug)
-        else:
-            slugs_list.insert(index, tag_slug)
-
-
 def tags_handler(search, tags_list=[]):
     default_slugs = [tag.slug for tag in Tag.objects.all()]
     if search:
