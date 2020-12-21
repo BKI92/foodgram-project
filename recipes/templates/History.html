@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}История покупок{% endblock %}
+{% load static %}
+{% block content %}
+<main class="main container">
+    <div class="main__header">
+        <h1 class="main__title">История покупок</h1>
+    </div>
+    <div class="card-list card-list_column">
+        <ul class="shopping-list">
+            {% for  item in page %}
+            <li class="shopping-list__item" >
+                    <h3 class="recipe__title">{{item.pub_date}}</h3>
+                    <div class=" recipe_reverse">
+                        {% for recipe in item.recipes.all %}
+                            <p class="single-card__section-item">{{recipe.title}}</p>
+                        {% endfor %}
+                    </div>
+
+                <a href="{% url 'recover_shop_list' item.id %}" class="shopping-list__button link">Восстановить покупки</a>
+            </li>
+            {% endfor %}
+        </ul>
+
+
+    </div>
+</main>
+{% endblock %}
