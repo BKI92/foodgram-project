@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from recipes.models import Recipe, Tag, Ingredient, IngredientAmount, Follow, \
-    Favorite
+    Favorite, ShopList, History
 
 
 @admin.register(Recipe)
@@ -42,3 +42,17 @@ class FavoriteAdmin(admin.ModelAdmin):
     list_display = ('pk', 'user')
     search_fields = ('user',)
     list_filter = ('user',)
+
+
+@admin.register(ShopList)
+class ShopListAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'user',)
+    search_fields = ('user',)
+    list_filter = ('user',)
+
+
+@admin.register(History)
+class HistoryAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'user', 'pub_date')
+    search_fields = ('user',)
+    list_filter = ('user', 'pub_date')
