@@ -5,17 +5,18 @@ User = get_user_model()
 
 
 class Tag(models.Model):
-    title = models.CharField(unique=True, max_length=15)
-    style = models.CharField('Стиль', max_length=30, null=False, default="green")
-    slug = models.SlugField(max_length=15, unique=True, default="", null=False)
+    title = models.CharField('Название', unique=True, max_length=15)
+    style = models.CharField('Стиль', max_length=30, null=False,
+                             default="green")
+    slug = models.SlugField('Слаг', unique=True, max_length=15, default="")
 
     def __str__(self):
         return self.title
 
 
 class Ingredient(models.Model):
-    title = models.CharField(db_index=True, max_length=30)
-    dimension = models.CharField(max_length=15)
+    title = models.CharField('Название', db_index=True, max_length=30)
+    dimension = models.CharField('Единицы измерения', max_length=15)
 
     def __str__(self):
         return self.title
@@ -25,39 +26,38 @@ class Recipe(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="recipes"
+        related_name='recipes',
+        verbose_name='Автор'
     )
-    title = models.CharField(unique=True, max_length=200)
-    description = models.TextField(blank=False, verbose_name='Описание рецепта')
-    image = models.ImageField(upload_to='recipes/')
+    title = models.CharField('Название', unique=True, max_length=200)
+    description = models.TextField('Описание рецепта', blank=False)
+    image = models.ImageField('Картинка', upload_to='recipes/')
     ingredients = models.ManyToManyField(
-        Ingredient,
-        related_name='recipe_ingredient',
-        through='IngredientRecipes',
-        verbose_name='Ингредиенты в рецепте',
+        'IngredientAmount',
+        verbose_name='Ингридиент',
+        related_name='ingredient_amount',
+
     )
-    tag = models.ManyToManyField(
-        Tag, related_name='recipe_tags',
-        verbose_name='Тэги рецепта'
+    tags = models.ManyToManyField(
+        Tag, related_name='recipe_tags', verbose_name='Тэги рецепта',
     )
     duration = models.PositiveSmallIntegerField()
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True, blank=True, null=True)
     pub_date = models.DateTimeField(
-        "Дата создания", auto_now_add=True,
-        db_index=True
+        'Дата создания', auto_now_add=True,
+        db_index=True,
     )
 
     def __str__(self):
         return self.title
 
 
-class IngredientRecipes(models.Model):
+class IngredientAmount(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.DO_NOTHING)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     amount = models.IntegerField()
 
     def __str__(self):
-        return f'{self.recipe} - {self.ingredient}'
+        return f'{self.ingredient} - {self.amount}'
 
 
 class Follow(models.Model):
@@ -77,25 +77,34 @@ class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipes = models.ManyToManyField(
         Recipe,
-        related_name='favorite',
+        related_name='favorites',
         verbose_name='Избранные рецепты'
     )
 
 
-class Basket(models.Model):
-    USE_STATUS = [('True', 'True'), ('False', 'False')]
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class ShopList(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     recipes = models.ManyToManyField(
         Recipe,
-        related_name='basket',
-        verbose_name='Корзина'
+        related_name='shop_list',
+        verbose_name='Список покупок'
     )
-    created = models.DateTimeField(
-        verbose_name="Дата создания",
-        auto_now_add=True,
-        db_index=True
-    )
-    used = models.CharField(choices=USE_STATUS, default='False', max_length=10)
 
     def __str__(self):
-        return f"{self.user} - {self.created}"
+        return f"{self.user}'s - ShopList"
+
+
+class History(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(
+        'Дата создания', auto_now_add=True,
+        db_index=True,
+    )
+    recipes = models.ManyToManyField(
+        Recipe,
+        related_name='history',
+        verbose_name='История покупок'
+    )
+
+    def __str__(self):
+        return f"{self.user}'s - History"
