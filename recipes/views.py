@@ -149,6 +149,7 @@ def send_pdf(request):
                         filename=f'shoplist_{date_str}')
 
 
+@login_required
 def author_recipes(request, author):
     search = request.GET.getlist('search')
     tags = Tag.objects.all()
@@ -175,6 +176,7 @@ def author_recipes(request, author):
     )
 
 
+@login_required
 def recipe_view(request, recipe_id):
     current_recipe = get_object_or_404(Recipe, id=recipe_id)
     return render(
@@ -185,8 +187,10 @@ def recipe_view(request, recipe_id):
     )
 
 
+@login_required
 def history_view(request):
-    my_history = History.objects.filter(user=request.user.id).order_by('-pub_date')
+    my_history = History.objects.filter(user=request.user.id).order_by(
+        '-pub_date')
     paginator = Paginator(my_history, 6)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
@@ -199,6 +203,7 @@ def history_view(request):
     )
 
 
+@login_required
 def recover_shop_list(request, history_id):
     my_history = get_object_or_404(History, pk=history_id)
     my_shop_list = get_object_or_404(ShopList, user=request.user)
@@ -206,4 +211,13 @@ def recover_shop_list(request, history_id):
         my_shop_list.recipes.add(recipe)
     return redirect(
         'shop_list'
+    )
+
+
+@login_required
+def delete_history(request, history_id):
+    my_history = get_object_or_404(History, pk=history_id)
+    my_history.delete()
+    return redirect(
+        'history_view'
     )
