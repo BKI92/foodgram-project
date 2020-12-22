@@ -15,4 +15,6 @@ urlpatterns = [
     path("history/", views.history_view, name="history_view"),
     path("history/<int:history_id>/", views.recover_shop_list,
          name="recover_shop_list"),
+    path("history/delete/<int:history_id>/", views.delete_history,
+         name="delete_history"),
 ]
