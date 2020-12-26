@@ -37,7 +37,7 @@ def generate_tag_links(tags_list):
     return links
 
 
-def get_ingredients(recipes):
+def get_recipe_ingredients(recipes):
     final_dict = {}
     for recipe in recipes:
         for ing in recipe.ingredients.all():
@@ -66,3 +66,12 @@ def generate_pdf(ings_dict, buffer):
         p.drawString(x1, y1, text)
     p.showPage()
     p.save()
+
+
+def get_form_ingredients(request):
+    ingredients = {}
+    for key, ingredient_name in request.POST.items():
+        if 'nameIngredient' in key:
+            ing_id = key.split('_')[-1]
+            ingredients[ingredient_name] = int(ing_id)
+    return ingredients
