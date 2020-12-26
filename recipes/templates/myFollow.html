@@ -1,28 +1,37 @@
 {% extends "base.html" %}
 {% block title %}Мои подписки{% endblock %}
 {% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'pages/myFollow.css' %}">
+{% endblock %}
+{% load recipe_filters %}
 {% block content %}
-
+{% csrf_token %}
 <main class="main container">
     <div class="main__header">
         <h1 class="main__title">Мои подписки</h1>
     </div>
     <div class="card-list">
         {% for follow, recipes in page %}
-        <div class="card-user" data-author="{{follow.author_id}}">
+        <div class="card-user" data-author={{follow.id}}>
             <div class="card-user__header">
                 <h2 class="card-user__title">{{follow}}</h2>
             </div>
             <div class="card-user__body">
                 <ul class="card-user__items">
-                    {% for recipe in recipes|slice:":3" %}
+                    {% for recipe in recipes|slice:visible %}
                     <li class="card-user__item">
                         <div class="recipe">
                             {% load thumbnail %}
                             {% thumbnail recipe.image "72x72" crop="center" upscale=True as im %}
-                            <img class="card-img" src="{{ im.url }}" alt="какой-то-текст" class="recipe__image"/>
+                                <a href="{% url 'recipe_view' recipe.id %}">
+                                    <img class="card-img" src="{{ im.url }}" alt="какой-то-текст" class="recipe__image"/>
+                                </a>
                             {% endthumbnail %}
-                            <h3 class="recipe__title">{{recipe.title}}</h3>
+
+                            <h3 class="recipe__title">
+                                <a href="{% url 'recipe_view' recipe.id %}" class="card-user__link link" style="color:black">{{recipe.title}}</a>
+                            </h3>
 
                             <p class="recipe__text">
                                 <span class="icon-time"></span>
@@ -31,15 +40,20 @@
                         </div>
                     </li>
                     {%endfor%}
+                    <li class="card-user__item">
+                        {% if visible|count_hidden_recipes:recipes.count > 0 %}
+                            <a href="{% url 'author_recipes' follow %}" class="card-user__link link">Еще {{visible|count_hidden_recipes:recipes.count}} рецепт{{visible|get_ending:recipes.count}} ...</a>
+                        {% else %}
+                            <a href="{% url 'author_recipes' follow %}" class="card-user__link link">Больше нет рецептов ...</a>
+                        {% endif %}
+                    </li>
                 </ul>
             </div>
             <div class="card-user__footer">
-                <button class="button button_style_light-blue button_size_auto"
-                        name="subscribe">Отписаться
-                </button>
+                <button class="button button_style_light-blue button_size_auto" name="subscribe" >Отписаться</button>
             </div>
         </div>
-        {%endfor%}
+        {% endfor %}
     </div>
 
     {% if page.has_other_pages %}
@@ -47,3 +61,13 @@
     {% endif %}
 </main>
 {%endblock%}
+
+{% block js %}
+    <script src="{% static 'js/config/config.js' %}"></script>
+    <script src="{% static 'js/components/MainCards.js' %}"></script>
+    <script src="{% static 'js/components/MyFollow.js' %}"></script>
+    <script src="{% static 'js/components/Subscribe.js' %}"></script>
+    <script src="{% static 'js/components/Header.js' %}"></script>
+    <script src="{% static 'js/api/Api.js' %}"></script>
+    <script src="{% static 'myFollow.js' %}"></script>
+{% endblock %}

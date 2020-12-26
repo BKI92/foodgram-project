@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block title %}История покупок{% endblock %}
 {% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'pages/shopList.css' %}">
+{% endblock %}
 {% block content %}
 <main class="main container">
     <div class="main__header">
@@ -17,14 +20,15 @@
                         {% endfor %}
                     </div>
 
-                <a href="{% url 'recover_shop_list' item.id %}" class="shopping-list__button link">Восстановить</a>
+                <a href="{% url 'recover_shop_list' item.id %}" class="shopping-list__button link" title="Расширит список покупок данными рецптами.">Восстановить</a>
 
                 <a href="{% url 'delete_history' item.id %}" class="shopping-list__button link">Удалить</a>
             </li>
             {% endfor %}
         </ul>
-
-
     </div>
+    {% if page.has_other_pages %}
+        {% include "paginator.html" with items=page paginator=paginator%}
+    {% endif %}
 </main>
 {% endblock %}
