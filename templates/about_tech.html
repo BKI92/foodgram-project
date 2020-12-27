@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Об авторе{% endblock %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'pages/index.css'%}">
+{% endblock %}
+{% block content %}
+<div class="custom-center-block">
+    <h2>Технологии</h2>
+    <div class="card-user__body">
+        <p  style="font-family: Arial;  font-size: 16px; line-height: 1.5;">
+            В проекте использованы следующие технологии:
+        </p>
+        <ol>
+            <li>
+                <ul style="margin-bottom:10px;"> <b>Для создания сайта:</b>
+                    <li>Python v:3.7.6</li>
+                    <li>PostgreSQL v:13</li>
+                    <li>Javascript</li>
+                    <li>HTML 5</li>
+                    <li>CSS 3</li>
+                </ul>
+            </li>
+
+            <li>
+                <ul style="margin-bottom:10px;"> <b>Для разворачивания на боевом сервере:</b>
+                    <li>Docker</li>
+                    <li>Nginx</li>
+                    <li>Gunicorn</li>
+
+                </ul>
+            </li>
+
+            <li>
+                <ul style="margin-bottom:10px;"> <b>Для автаматического деплоя:</b>
+                    <li>GitHub workflow</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+
+{% endblock %}
