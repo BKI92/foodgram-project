@@ -39,6 +39,6 @@ urlpatterns = [
     path("subscriptions/<int:author_id>", views.delete_subscriptions,
          name="delete_subscriptions"),
 
-    path("ingredients", views.get_recipe_ingredients, name="get_recipe_ingredients"),
+    path("ingredients", views.get_ingredients, name="get_ingredients"),
 
 ]
