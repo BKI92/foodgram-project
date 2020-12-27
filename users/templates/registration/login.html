@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load user_filters %}
 {% block title %}Авторизация{% endblock %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'pages/form.css' %}">
+{% endblock %}
 {% block content %}
 
 <main class="main container">
