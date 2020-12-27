@@ -2,6 +2,9 @@
 {% load recipe_filters %}
 {% block title %}Последние обновления{% endblock %}
 {% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'pages/index.css'%}">
+{% endblock %}
 {% block content %}
 {% csrf_token %}
 
