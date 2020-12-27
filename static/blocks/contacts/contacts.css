@@ -1,0 +1,22 @@
+ .vk {
+    /*float:right;*/
+	 display: inline-table;
+	width: 40px;
+	height: 40px;
+	 margin-left: 20px;
+	background-image: url('../../../media/images/vk.png');
+	 background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.tg {
+	/*float:right;*/
+		 display: inline-table;
+
+	width: 40px;
+	height: 40px;
+	margin-left: 20px;
+	background-image: url('../../../media/images/tg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
