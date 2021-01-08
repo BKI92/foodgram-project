@@ -39,7 +39,7 @@ def get_ending(visible_recipes, all_recipes):
 
 @register.filter
 def count_recipes(request):
-    my_shop_list = get_object_or_404(ShopList, user=request.user)
+    my_shop_list = ShopList.objects.get_or_create(user=request.user)[0]
     recipes_amount = my_shop_list.recipes.count()
     return recipes_amount
 
