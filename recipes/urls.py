@@ -15,8 +15,8 @@ urlpatterns = [
          name="change_recipe"),
 
     path("favorite/", views.favorite, name="favorite"),
-    path("favorites", views.add_favorites, name="add_favorite"),
-    path("favorites/<int:recipe_id>", views.delete_favorites,
+    path("favorites/", views.add_favorites, name="add_favorite"),
+    path("favorites/<int:recipe_id>/", views.delete_favorites,
          name="delete_favorite"),
 
     path("shop_list/", views.shop_list, name="shop_list"),
@@ -30,15 +30,15 @@ urlpatterns = [
     path("history/delete/<int:history_id>/", views.delete_history,
          name="delete_history"),
 
-    path("purchases", views.add_purchases, name="add_purchases"),
-    path("purchases/<int:recipe_id>", views.delete_purchases,
+    path("purchases/", views.add_purchases, name="add_purchases"),
+    path("purchases/<int:recipe_id>/", views.delete_purchases,
          name="delete_purchases"),
 
-    path("subscriptions", views.create_subscriptions,
+    path("subscriptions/", views.create_subscriptions,
          name="create_subscriptions"),
-    path("subscriptions/<int:author_id>", views.delete_subscriptions,
+    path("subscriptions/<int:author_id>/", views.delete_subscriptions,
          name="delete_subscriptions"),
 
-    path("ingredients", views.get_ingredients, name="get_ingredients"),
+    path("ingredients/", views.get_ingredients, name="get_ingredients"),
 
 ]
