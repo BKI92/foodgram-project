@@ -57,9 +57,10 @@
             </div>
         {% endfor %}
     </div>
-            {% if page.has_other_pages %}
-                {% include "paginator.html" with items=page paginator=paginator%}
-            {% endif %}
+
+    {% if page.has_other_pages %}
+        {% include "paginator.html" with items=page paginator=paginator%}
+    {% endif %}
 </main>
 {% endblock %}
 
