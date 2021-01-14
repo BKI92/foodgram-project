@@ -15,7 +15,7 @@
         {% for follow, recipes in page %}
         <div class="card-user" data-author={{follow.id}}>
             <div class="card-user__header">
-                <h2 class="card-user__title">{{follow}}</h2>
+                <h2 class="card-user__title">{{ follow }}</h2>
             </div>
             <div class="card-user__body">
                 <ul class="card-user__items">
@@ -30,19 +30,19 @@
                             {% endthumbnail %}
 
                             <h3 class="recipe__title">
-                                <a href="{% url 'recipe_view' recipe.id %}" class="card-user__link link" style="color:black">{{recipe.title}}</a>
+                                <a href="{% url 'recipe_view' recipe.id %}" class="card-user__link link" style="color:black">{{ recipe.title }}</a>
                             </h3>
 
                             <p class="recipe__text">
                                 <span class="icon-time"></span>
-                                {{recipe.duration}} мин.
+                                {{ recipe.duration }} мин.
                             </p>
                         </div>
                     </li>
                     {%endfor%}
                     <li class="card-user__item">
                         {% if visible|count_hidden_recipes:recipes.count > 0 %}
-                            <a href="{% url 'author_recipes' follow %}" class="card-user__link link">Еще {{visible|count_hidden_recipes:recipes.count}} рецепт{{visible|get_ending:recipes.count}} ...</a>
+                            <a href="{% url 'author_recipes' follow %}" class="card-user__link link">Еще {{ visible|count_hidden_recipes:recipes.count }} рецепт{{ visible|get_ending:recipes.count }} ...</a>
                         {% else %}
                             <a href="{% url 'author_recipes' follow %}" class="card-user__link link">Больше нет рецептов ...</a>
                         {% endif %}
