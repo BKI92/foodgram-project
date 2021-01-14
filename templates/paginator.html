@@ -10,9 +10,9 @@
 
     {% for i in paginator.page_range %}
         {% if items.number == i %}
-        <li class="pagination__item pagination__item_active"><a class="pagination__link link" href="?{% if request.GET %}{{tags_list|link_generator}}&{% endif %}page={{ i }}">{{i}}</a></li>
+            <li class="pagination__item pagination__item_active"><a class="pagination__link link" href="?{% if request.GET %}{{tags_list|link_generator}}&{% endif %}page={{ i }}">{{i}}</a></li>
         {% else %}
-        <li class="pagination__item"><a class="pagination__link link" href="?{% if request.GET %}{{tags_list|link_generator}}&{% endif %}page={{ i }}">{{i}}</a></li>
+            <li class="pagination__item"><a class="pagination__link link" href="?{% if request.GET %}{{tags_list|link_generator}}&{% endif %}page={{ i }}">{{i}}</a></li>
         {% endif %}
     {% endfor %}
 
