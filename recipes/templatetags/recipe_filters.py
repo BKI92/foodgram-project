@@ -8,6 +8,10 @@ register = template.Library()
 
 @register.filter
 def get_value(dictionary, key):
+    """
+    This filter uses object's attribute as dictionary key.
+    """
+
     return dictionary.get(key)
 
 
