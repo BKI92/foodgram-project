@@ -16,7 +16,7 @@
             <div class="form__group">
                 <label for="id_name" class="form__label">Название рецепта</label>
                 <div class="form__field-group">
-                    <input type="text" id="id_title" name="title" class="form__input" value="{{recipe.title}}">
+                    <input type="text" id="id_title" name="title" class="form__input" value="{{ recipe.title }}">
                     <span class="form__error"></span>
                 </div>
             </div>
@@ -50,11 +50,9 @@
                     <div class="form__field-group-ingredientes-container">
                         {% for ing in recipe.ingredients.all %}
                             <div class="form__field-item-ingredient" id={{ing.id}}>
-                                <span> {{ing.ingredient.title}} {{ing.amount}} {{ing.ingredient.dimension}}</span>
+                                <span> {{ ing.ingredient.title }} {{ ing.amount }} {{ ing.ingredient.dimension }}</span>
                                 <span class="form__field-item-delete"></span>
                                 <input id="nameIngredient_{{ing.id}}" name="nameIngredient_{{ing.id}}" type="hidden" value={{ing.ingredient.title}}>
-<!--                                <input id="valueIngredient_3" name="valueIngredient_3" type="hidden" value="10">-->
-<!--                                <input id="unitsIngredient_3" name="unitsIngredient_3" type="hidden" value="шт.">-->
                             </div>
                         {% endfor %}
                     </div>
@@ -65,7 +63,7 @@
             <div class="form__group">
                 <label for="id_time" class="form__label">Время приготовления</label>
                 <div class="form__field-group form__field-group_time">
-                    <input type="text" id="id_duration" name="duration" class="form__input" value="{{recipe.duration}}">
+                    <input type="text" id="id_duration" name="duration" class="form__input" value="{{ recipe.duration }}">
                     <label for="id_time" class="form__label">минут</label>
                     <span class="form__error"></span>
                 </div>
@@ -74,9 +72,9 @@
                 <label for="id_description" class="form__label">Описание</label>
                 <div class="form__field-group">
                     <textarea name="description" id="id_description" rows="8" class="form__textarea">
-                        {{recipe.description}}
+                        {{ recipe.description }}
                     </textarea>
-                    <span class="form__error">{{form.description.errors}}</span>
+                    <span class="form__error">{{ form.description.errors }}</span>
                 </div>
             </div>
             <div class="form__group">
@@ -92,12 +90,12 @@
                 <div class="form__group">
                     <span class="form__label">Текущее</span>
                     <div class="form__field-group">
-                        <img src="/media/{{ recipe.image }}" alt="{{recipe.title}}" style="width:100px;">
+                        <img src="/media/{{ recipe.image }}" alt="{{ recipe.title }}" style="width:100px;">
                     </div>
                 </div>
             {% endif %}
             <div class="form__footer">
-                <button class="button button_style_blue">Сохранить</button> <a style="margin-left: 2.5em" href="#" class="form__ingredient-link">Удалить</a>
+                <button class="button button_style_blue">Сохранить</button> <a style="margin-left: 2.5em" href="{% url 'delete_recipe' recipe.id %}" class="form__ingredient-link">Удалить</a>
             </div>
         </form>
     </div>
