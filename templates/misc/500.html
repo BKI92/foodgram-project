@@ -1,0 +1,17 @@
+{% block title %}Сервер временно недоступен{% endblock %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'pages/form.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="main container">
+    <div class="custom-center-block">
+        <h1 class="custom-text-block-header">На сервере обнаружены проблемы. Скоро администратор устранит их.  </h1>
+        
+        <div class="custom-button-block">
+            <button class="button button_style_blue">Перейти на главную</button>
+        </div>
+    </div>
+</main>
+{% endblock %}

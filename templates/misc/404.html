@@ -1,0 +1,18 @@
+{% block title %}Страница не найдена{% endblock %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'pages/form.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main class="main container">
+    <div class="custom-center-block">
+        <h1 class="custom-text-block-header">Запрошенная страница не найдена. </h1>
+
+        <div class="custom-button-block">
+            <button class="button button_style_blue">Перейти на главную</button>
+        </div>
+    </div>
+</main>
+{% endblock %}
