@@ -5,8 +5,10 @@ from reportlab.pdfgen import canvas
 from recipes.models import Tag
 
 
-def tags_handler(search, tags_list=[]):
-    default_slugs = [tag.slug for tag in Tag.objects.all()]
+def tags_handler(search, tags_list=None):
+    if tags_list is None:
+        tags_list = []
+    default_slugs = Tag.objects.values_list('slug', flat=True)
     if search:
         tags_list.clear()
         for tag_slug in search:
@@ -21,7 +23,7 @@ def tags_handler(search, tags_list=[]):
 
 
 def generate_tag_links(tags_list):
-    default_slugs = [tag.slug for tag in Tag.objects.all()]
+    default_slugs = Tag.objects.values_list('slug', flat=True)
     links = {}
     for tag in default_slugs:
         if tag in tags_list:
