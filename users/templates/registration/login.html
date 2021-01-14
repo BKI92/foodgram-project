@@ -5,6 +5,7 @@
 {% block styles %}
     <link rel="stylesheet" href="{% static 'pages/form.css' %}">
 {% endblock %}
+
 {% block content %}
 
 <main class="main container">
@@ -14,18 +15,15 @@
 
     <div class="form-container">
         <form class="form" method="post">
-
             {% csrf_token %}
 
             {% for field in form %}
-
-            <div class="form__group">
-                <label for="field.id_for_label" class="form__label">{{ field.label }}</label>
-                <div class="form__field-group">
-                    {{field|addclass:"form__input"}}
+                <div class="form__group">
+                    <label for="field.id_for_label" class="form__label">{{ field.label }}</label>
+                    <div class="form__field-group">
+                        {{field|addclass:"form__input"}}
+                    </div>
                 </div>
-            </div>
-
             {% endfor %}
 
             {% if form.errors %}
@@ -34,7 +32,8 @@
 
             <div class="form__footer">
                 <button class="button button_style_blue">Войти</button>
-                <a class="form__forgot-link" href={% url 'password_reset' %}>Забыли пароль?</a>
+
+                <a class="form__forgot-link" href="{% url 'password_reset' %}">Забыли пароль?</a>
             </div>
         </form>
     </div>
