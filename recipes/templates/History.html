@@ -11,12 +11,12 @@
     </div>
     <div class="card-list card-list_column">
         <ul class="shopping-list">
-            {% for  item in page %}
+            {% for item in page %}
             <li class="shopping-list__item" >
-                    <h3 class="recipe__title">{{item.pub_date}}</h3>
+                    <h3 class="recipe__title">{{ item.pub_date }}</h3>
                     <div class=" recipe_reverse">
                         {% for recipe in item.recipes.all %}
-                            <p class="single-card__section-item">{{recipe.title}}</p>
+                            <p class="single-card__section-item">{{ recipe.title }}</p>
                         {% endfor %}
                     </div>
 
