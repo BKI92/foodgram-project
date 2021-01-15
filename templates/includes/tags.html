@@ -4,7 +4,7 @@
     {% for tag in tags %}
     <li class="tags__item">
         <a id="tags"
-           class="tags__checkbox tags__checkbox_style_{{tag.style}} {% if tag.slug in tags_list %} tags__checkbox_active {% endif %}"
+           class="tags__checkbox tags__checkbox_style_{{tag.style}} {% if tag.slug in passed_tags %} tags__checkbox_active {% endif %}"
            href="?{{tags_links|get_value:tag.slug}}">
         </a>
         <span class="tags__label">{{ tag }}</span>
