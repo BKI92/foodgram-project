@@ -5,20 +5,19 @@ from reportlab.pdfgen import canvas
 from recipes.models import Tag
 
 
-def tags_handler(search, tags_list=None):
-    if tags_list is None:
-        tags_list = []
+def tags_handler(search):
+    saved_tags = []
     default_slugs = Tag.objects.values_list('slug', flat=True)
     if search:
-        tags_list.clear()
+        saved_tags.clear()
         for tag_slug in search:
-            if tag_slug in tags_list:
-                tags_list.remove(tag_slug)
+            if tag_slug in saved_tags:
+                saved_tags.remove(tag_slug)
             else:
-                tags_list.append(tag_slug)
-        return tags_list
-    if tags_list:
-        return tags_list
+                saved_tags.append(tag_slug)
+        return saved_tags
+    if saved_tags:
+        return saved_tags
     return default_slugs
 
 
@@ -52,7 +51,7 @@ def get_recipe_ingredients(recipes):
     return final_dict
 
 
-def generate_pdf(ings_dict, buffer):
+def generate_pdf(ingredients, buffer):
     p = canvas.Canvas(buffer)
     pdfmetrics.registerFont(
         TTFont('FreeSansOblique', 'static/FreeSansOblique.ttf'))
@@ -62,8 +61,8 @@ def generate_pdf(ings_dict, buffer):
     p.drawString(x, y, header)
     p.setFont('FreeSansOblique', 15)
     x1, y1 = 50, 790
-    for index, ing in enumerate(ings_dict):
-        text = f"{index + 1}) {ing} - {ings_dict[ing][0]} {ings_dict[ing][1]}."
+    for index, ing in enumerate(ingredients):
+        text = f"{index + 1}) {ing} - {ingredients[ing][0]} {ingredients[ing][1]}."
         y1 -= 25
         p.drawString(x1, y1, text)
     p.showPage()
