@@ -42,12 +42,13 @@ def get_recipe_ingredients(recipes):
     final_dict = {}
     for recipe in recipes:
         for ing in recipe.ingredients.all():
-            if ing.ingredient.title in final_dict and ing.ingredient.dimension == \
-                    final_dict[ing.ingredient.title][1]:
-                final_dict[ing.ingredient.title][0] += ing.amount
+            title = ing.ingredient.title
+            dimension = ing.ingredient.dimension
+            amount = ing.amount
+            if title in final_dict and dimension == final_dict[title][1]:
+                final_dict[title][0] += amount
             else:
-                final_dict[ing.ingredient.title] = [ing.amount,
-                                                    ing.ingredient.dimension]
+                final_dict[title] = [amount, dimension]
     return final_dict
 
 
@@ -62,7 +63,8 @@ def generate_pdf(ingredients, buffer):
     p.setFont('FreeSansOblique', 15)
     x1, y1 = 50, 790
     for index, ing in enumerate(ingredients):
-        text = f"{index + 1}) {ing} - {ingredients[ing][0]} {ingredients[ing][1]}."
+        text = f"{index + 1}) {ing} - {ingredients[ing][0]} " \
+               f"{ingredients[ing][1]}."
         y1 -= 25
         p.drawString(x1, y1, text)
     p.showPage()
