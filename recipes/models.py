@@ -26,7 +26,8 @@ class Tag(models.Model):
         (VIOLET, 'violet'),
     )
     title = models.CharField('Название', unique=True, max_length=15)
-    style = models.CharField('Стиль', max_length=30, null=False, default='green', choices=COLORS)
+    style = models.CharField('Стиль', max_length=30, null=False,
+                             default='green', choices=COLORS)
     slug = models.SlugField('Слаг', unique=True, max_length=15)
 
     def __str__(self):
@@ -112,7 +113,8 @@ class Follow(models.Model):
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'
         constraints = [
-            models.UniqueConstraint(fields=['user', 'author'], name='unique follow')
+            models.UniqueConstraint(fields=['user', 'author'],
+                                    name='unique follow')
         ]
 
 
