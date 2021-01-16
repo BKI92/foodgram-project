@@ -1,7 +1,6 @@
 from django import template
-from django.shortcuts import get_object_or_404
 
-from recipes.models import ShopList, Follow, Favorite
+from recipes.models import Favorite, Follow, ShopList
 
 register = template.Library()
 
