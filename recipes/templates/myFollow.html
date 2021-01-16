@@ -12,14 +12,14 @@
         <h1 class="main__title">Мои подписки</h1>
     </div>
     <div class="card-list">
-        {% for follow, recipes in page %}
-        <div class="card-user" data-author={{follow.id}}>
+        {% for follow in page %}
+        <div class="card-user" data-author={{follow.author.id}}>
             <div class="card-user__header">
-                <h2 class="card-user__title">{{ follow }}</h2>
+                <h2 class="card-user__title">{{ follow.author }}</h2>
             </div>
             <div class="card-user__body">
                 <ul class="card-user__items">
-                    {% for recipe in recipes|slice:visible %}
+                    {% for recipe in follow.author.recipes.all|slice:visible %}
                     <li class="card-user__item">
                         <div class="recipe">
                             {% load thumbnail %}
@@ -41,10 +41,12 @@
                     </li>
                     {%endfor%}
                     <li class="card-user__item">
-                        {% if visible|count_hidden_recipes:recipes.count > 0 %}
-                            <a href="{% url 'author_recipes' follow %}" class="card-user__link link">Еще {{ visible|count_hidden_recipes:recipes.count }} рецепт{{ visible|get_ending:recipes.count }} ...</a>
+                        {% if visible|count_hidden_recipes:follow.author.recipes.all.count > 0 %}
+                            <a href="{% url 'author_recipes' follow.author %}"
+                               class="card-user__link link">Еще {{ visible|count_hidden_recipes:follow.author.recipes.all.count }} рецепт{{ visible|get_ending:follow.author.recipes.all.count }} ...
+                            </a>
                         {% else %}
-                            <a href="{% url 'author_recipes' follow %}" class="card-user__link link">Больше нет рецептов ...</a>
+                            <a href="{% url 'author_recipes' follow.author %}" class="card-user__link link">Больше нет рецептов ...</a>
                         {% endif %}
                     </li>
                 </ul>
