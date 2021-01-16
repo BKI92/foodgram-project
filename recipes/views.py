@@ -23,8 +23,7 @@ def index(request):
     passed_tags = tags_handler(search)
     tags_links = generate_tag_links(passed_tags)
     tags_id = tags.filter(slug__in=passed_tags).values_list('id', flat=True)
-    recipes = Recipe.objects.filter(tags__in=tags_id).distinct().order_by(
-        '-pub_date')
+    recipes = Recipe.objects.filter(tags__in=tags_id).distinct()
 
     paginator = Paginator(recipes, 6)
     page_number = request.GET.get('page')
@@ -45,17 +44,13 @@ def index(request):
 @login_required
 def my_follow(request, username):
     follows = Follow.objects.filter(user=request.user)
-    follow_recipes = [[follow.author,
-                       Recipe.objects.filter(author=follow.author).order_by(
-                           '-pub_date')] for follow in follows]
-    paginator = Paginator(follow_recipes, 3)
+    paginator = Paginator(follows, 3)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
     return render(
         request,
         template_name='MyFollow.html',
         context={
-            'follow_recipes': follow_recipes,
             'visible': VISIBLE_RECIPES,
             'page': page,
             'paginator': paginator
@@ -185,7 +180,7 @@ def shop_list(request):
 @login_required
 def shop_list_delete(request, recipe_id):
     user = request.user
-    my_shop_list = ShopList.objects.get_or_create(user=user.id)
+    my_shop_list = ShopList.objects.get_or_create(user=user.id)[0]
     current_recipe = get_object_or_404(Recipe, id=recipe_id)
     my_shop_list.recipes.remove(current_recipe)
     return redirect('shop_list')
