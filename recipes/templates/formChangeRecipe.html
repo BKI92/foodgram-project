@@ -27,7 +27,7 @@
                         {% for tag in tags %}
                             <div class="tags__item">
                                 <input type="checkbox" name="tags" value="{{ tag.id }}" id="id_{{ tag.slug }}"
-                                       class="tags__checkbox tags__checkbox_style_{{ tag.style }}" {% if tag in tags_list %} checked {% endif %}>
+                                       class="tags__checkbox tags__checkbox_style_{{ tag.style }}" {% if tag in recipe_tags %} checked {% endif %}>
                             <label for="id_{{ tag.slug }}" class="tags__label">{{ tag.title }}</label>
                         </div>
                         {% endfor %}
@@ -52,7 +52,10 @@
                             <div class="form__field-item-ingredient" id={{ing.id}}>
                                 <span> {{ ing.ingredient.title }} {{ ing.amount }} {{ ing.ingredient.dimension }}</span>
                                 <span class="form__field-item-delete"></span>
-                                <input id="nameIngredient_{{ing.id}}" name="nameIngredient_{{ing.id}}" type="hidden" value={{ing.ingredient.title}}>
+                                <input id="nameIngredient_{{ing.id}}"
+                                       name="nameIngredient_{{ ing.id }}"
+                                       type="hidden"
+                                       value="{{ ing.ingredient.title }}">
                             </div>
                         {% endfor %}
                     </div>
@@ -86,11 +89,11 @@
                 </div>
             </div>
 
-            {% if recipe.image != Null %}
+            {% if recipe.image %}
                 <div class="form__group">
                     <span class="form__label">Текущее</span>
                     <div class="form__field-group">
-                        <img src="/media/{{ recipe.image }}" alt="{{ recipe.title }}" style="width:100px;">
+                        <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" style="width:100px;">
                     </div>
                 </div>
             {% endif %}
