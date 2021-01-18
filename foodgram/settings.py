@@ -26,8 +26,8 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 environ.Env.read_env()
-SECRET_KEY = env('SECRET_KEY')
-
+# SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = '-bx$04ypc-s=_0h+2j&loe^iwywg(cgvd_n29_qjchjsmhe09u'
 
 SITE_ID = 5
 DEBUG = True
