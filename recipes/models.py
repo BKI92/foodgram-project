@@ -30,24 +30,24 @@ class Tag(models.Model):
                              default='green', choices=COLORS)
     slug = models.SlugField('Слаг', unique=True, max_length=15)
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = 'Тэг'
         verbose_name_plural = 'Тэги'
+
+    def __str__(self):
+        return self.title
 
 
 class Ingredient(models.Model):
     title = models.CharField('Название', db_index=True, max_length=30)
     dimension = models.CharField('Единицы измерения', max_length=15)
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = 'Ингредиент'
         verbose_name_plural = 'Ингредиенты'
+
+    def __str__(self):
+        return self.title
 
 
 class Recipe(models.Model):
@@ -76,25 +76,25 @@ class Recipe(models.Model):
         db_index=True,
     )
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = 'Рецепт'
         verbose_name_plural = 'Рецепты'
         ordering = ['-pub_date']
+
+    def __str__(self):
+        return self.title
 
 
 class IngredientAmount(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.DO_NOTHING)
     amount = models.IntegerField()
 
-    def __str__(self):
-        return f'{self.ingredient} - {self.amount}'
-
     class Meta:
         verbose_name = 'Ингредиент с количеством'
         verbose_name_plural = 'Ингредиенты с количеством'
+
+    def __str__(self):
+        return f'{self.ingredient} - {self.amount}'
 
 
 class Follow(models.Model):
@@ -126,12 +126,12 @@ class Favorite(models.Model):
         verbose_name='Избранные рецепты'
     )
 
-    def __str__(self):
-        return f"{self.user}'s  recipes"
-
     class Meta:
         verbose_name = 'Избранный рецепт'
         verbose_name_plural = 'Избранные рецепты'
+
+    def __str__(self):
+        return f"{self.user}'s  recipes"
 
 
 class ShopList(models.Model):
@@ -142,12 +142,12 @@ class ShopList(models.Model):
         verbose_name='Список покупок'
     )
 
-    def __str__(self):
-        return f"{self.user}'s - ShopList"
-
     class Meta:
         verbose_name = 'Список покупок'
         verbose_name_plural = 'Списки покупок'
+
+    def __str__(self):
+        return f"{self.user}'s - ShopList"
 
 
 class History(models.Model):
@@ -162,9 +162,9 @@ class History(models.Model):
         verbose_name='История покупок'
     )
 
-    def __str__(self):
-        return f"{self.user}'s - History"
-
     class Meta:
         verbose_name = 'История покупок'
         verbose_name_plural = 'Истории покупок'
+
+    def __str__(self):
+        return f"{self.user}'s - History"
