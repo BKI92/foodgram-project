@@ -21,8 +21,8 @@ from django.urls import include, path
 
 from foodgram import settings
 
-handler404 = "views.page_not_found"
-handler500 = "views.server_error"
+handler404 = "foodgram.views.page_not_found"
+handler500 = "foodgram.views.server_error"
 
 urlpatterns = [
     path("auth/", include("users.urls")),
