@@ -21,8 +21,8 @@ from django.urls import include, path
 
 from foodgram import settings
 
-handler404 = "recipes.views.page_not_found"
-handler500 = "recipes.views.server_error"
+handler404 = "views.page_not_found"
+handler500 = "views.server_error"
 
 urlpatterns = [
     path("auth/", include("users.urls")),
@@ -32,11 +32,14 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path('about-author/', views.flatpage, {'url': '/about-author/'}, name='about_author'),
-    path('about-tech/', views.flatpage, {'url': '/about-tech/'}, name='about_tech'),
+    path('about-author/', views.flatpage, {'url': '/about-author/'},
+         name='about_author'),
+    path('about-tech/', views.flatpage, {'url': '/about-tech/'},
+         name='about_tech'),
 
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL)
