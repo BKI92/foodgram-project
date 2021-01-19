@@ -13,7 +13,7 @@
     </div>
     <div class="card-list">
         {% for follow in page %}
-        <div class="card-user" data-author={{follow.author.id}}>
+        <div class="card-user" data-author="{{ follow.author.id }}">
             <div class="card-user__header">
                 <h2 class="card-user__title">{{ follow.author }}</h2>
             </div>
@@ -59,10 +59,10 @@
     </div>
 
     {% if page.has_other_pages %}
-        {% include "includes/paginator.html" with items=page paginator=paginator%}
+        {% include "includes/paginator.html" with items=page paginator=paginator %}
     {% endif %}
 </main>
-{%endblock%}
+{% endblock %}
 
 {% block js %}
     <script src="{% static 'js/config/config.js' %}"></script>
