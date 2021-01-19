@@ -14,8 +14,8 @@
         {% include 'includes/tags.html' %}
     </div>
 
-    <div class="author-subscribe" data-author={{author.id}}>
-        {% if author != request.user and user.is_authenticated%}
+    <div class="author-subscribe" data-author="{{ author.id }}">
+        {% if author != request.user and user.is_authenticated %}
             {% if request|is_subscription:author.id %}
         <p style="padding: 0 0 2em 0;"><button class="button button_style_light-blue button_size_subscribe" name="subscribe" >Отписаться от автора</button></p>
             {% else %}
@@ -26,12 +26,14 @@
 
     <div class="card-list" >
         {% for recipe in page %}
-            <div class="card" data-id={{recipe.id}} data-author={{recipe.author.id}}>
+            <div class="card" data-id="{{ recipe.id }}"
+                 data-author="{{ recipe.author.id }}">
                 {% load thumbnail %}
 
                 {% thumbnail recipe.image "480x480" crop="center" upscale=True as im %}
                     <a href="{% url 'recipe_view' recipe.id %}" class="link" target="_blank">
-                        <img src="{{ im.url }}" alt={{recipe.title}} class="card__image">
+                        <img src="{{ im.url }}" alt="{{ recipe.title }}"
+                             class="card__image">
                     </a>
                 {% endthumbnail %}
 
@@ -40,7 +42,8 @@
 
                     <ul class="card__items">
                         {% for tag in recipe.tags.all %}
-                            <li class="card__item"><span class="badge badge_style_{{tag.style}}">{{ tag.title }}</span></li>
+                            <li class="card__item"><span
+                                    class="badge badge_style_{{ tag.style }}">{{ tag.title }}</span></li>
                         {% endfor %}
                     </ul>
 
