@@ -12,19 +12,29 @@
     <div class="card-list card-list_column">
         <ul class="shopping-list">
             {% for  recipe in recipes %}
-            <li class="shopping-list__item" data-id={{recipe.id}}>
+                <li class="shopping-list__item" data-id="{{ recipe.id }}">
                     <div class="recipe recipe_reverse">
                         {% load thumbnail %}
-                                {% thumbnail recipe.image "72x72" crop="center" upscale=True as im %}
-                        <a href="{% url 'recipe_view' recipe.id %}"><img class="card-img" src="{{ im.url }}" alt="какой-то-текст" class="recipe__image"/></a>
-                                {% endthumbnail %}
-                        <h3 class="recipe__title">{{recipe.title}}</h3>
-                        <p class="recipe__text"><span class="icon-time"></span> {{recipe.duration}} мин.</p>
-                    </div>
-                </a>
 
-                <a href="{% url 'shop_list_delete' recipe.id %}"  class="shopping-list__button link">Удалить</a>
-            </li>
+                        {% thumbnail recipe.image "72x72" crop="center" upscale=True as im %}
+                            <a href="{% url 'recipe_view' recipe.id %}"><img
+                                    class="card-img" src="{{ im.url }}"
+                                    alt="{{ recipe.title }}"
+                                    class="recipe__image"/>
+                            </a>
+                        {% endthumbnail %}
+
+                        <h3 class="recipe__title">{{ recipe.title }}</h3>
+
+                        <p class="recipe__text">
+                            <span class="icon-time"></span>
+
+                            {{ recipe.duration }} мин.
+                        </p>
+                    </div>
+
+                    <a href="{% url 'shop_list_delete' recipe.id %}"  class="shopping-list__button link">Удалить</a>
+                </li>
             {% endfor %}
         </ul>
         <a {% if recipes %} href="{% url 'shop_list_send_pdf' %}" {% endif %}><button class="button button_style_blue">Скачать список</button></a>
