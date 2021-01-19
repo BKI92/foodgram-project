@@ -16,9 +16,11 @@
             <div class="form__group">
                 <label for="id_title" class="form__label">Название рецепта</label>
                 <div class="form__field-group">
-                    <input type="text" id="id_title" name="title" class="form__input" value="{{recipe.title}}">
+                    <input type="text" id="id_title" name="title"
+                           class="form__input" value="{{ recipe.title }}">
                     {% if form.title.errors %}
-                        <span class="form__error">{{form.title.errors}}</span>
+                        <span class="form__error">
+                            {{ form.title.errors }}</span>
                     {% endif %}
                 </div>
             </div>
@@ -34,7 +36,7 @@
                         {% endfor %}
                     </div>
                     {% if form.tags.errors %}
-                        <span class="form__error">{{form.tags.errors}}</span>
+                        <span class="form__error">{{ form.tags.errors }}</span>
                     {% endif %}
                 </div>
             </div>
@@ -54,14 +56,17 @@
                     </div>
                     <span class="form__ingredient-link" id="addIng">Добавить ингредиент</span>
                     {% if form.non_field_errors %}
-                        <span class="form__error">{{form.non_field_errors}}</span>
+                        <span class="form__error">
+                            {{ form.non_field_errors }}
+                        </span>
                     {% endif %}
                 </div>
             </div>
             <div class="form__group">
                 <label for="id_time" class="form__label">Время приготовления</label>
                 <div class="form__field-group form__field-group_time">
-                    <input type="text" id="id_time" name="duration" class="form__input" value={{recipe.duration}}>
+                    <input type="text" id="id_time" name="duration"
+                           class="form__input" value="{{ recipe.duration }}">
                     <label for="id_time" class="form__label">минут</label>
                     {% if form.duration.errors %}
                         <span class="form__error">{{ form.duration.errors }}</span>
@@ -71,18 +76,25 @@
             <div class="form__group">
                 <label for="id_description" class="form__label">Описание</label>
                 <div class="form__field-group">
-                    <textarea name="description" id="id_description" rows="8" class="form__textarea">{{recipe.description}}</textarea>
+                    <textarea name="description" id="id_description"
+                              rows="8" class="form__textarea">
+                        {{ recipe.description }}
+                    </textarea>
                     {% if form.description.errors %}
-                        <span class="form__error">{{form.description.errors}}</span>
+                        <span class="form__error">
+                            {{ form.description.errors }}</span>
                     {% endif %}
                 </div>
             </div>
             <div class="form__group">
                 <span class="form__label">Загрузить фото</span>
                 <div class="form__field-group">
-                    <input type="file" name="image" id="id_file" value={{recipe.image}}>
+                    <input type="file" name="image" id="id_file"
+                           value="{{ recipe.image }}">
                     {% if form.image.errors %}
-                        <span class="form__error">{{form.image.errors|striptags}}</span>
+                        <span class="form__error">
+                            {{ form.image.errors|striptags }}
+                        </span>
                     {% endif %}
                 </div>
             </div>
@@ -92,9 +104,9 @@
         </form>
     </div>
 </main>
-{% endblock%}
+{% endblock %}
 
-{% block js%}
+{% block js %}
     <script src="{% static 'js/config/config.js' %}"></script>
     <script src="{% static '/js/utils/debouncing.js' %}"></script>
     <script src="{% static 'js/components/Header.js' %}"></script>
