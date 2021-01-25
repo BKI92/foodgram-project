@@ -322,7 +322,7 @@ def delete_subscriptions(request, author_id):
 
 @login_required
 def get_ingredients(request):
-    text = request.GET.get('query')
+    text = request.GET.get('query').rstrip('/')
     data = []
     ingredients = Ingredient.objects.filter(
         title__startswith=text).all()
