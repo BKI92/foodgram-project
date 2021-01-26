@@ -18,4 +18,5 @@ class Command(BaseCommand):
                     Ingredient.objects.get_or_create(title=title,
                                                      dimension=dimension)
                 except Exception as exc:
-                    print(f'В строке {row} некорректные данные')
+                    print(f'В строке {row} ошибка {exc}.')
+
