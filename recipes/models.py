@@ -39,7 +39,7 @@ class Tag(models.Model):
 
 
 class Ingredient(models.Model):
-    title = models.CharField('Название', db_index=True, max_length=30)
+    title = models.CharField('Название', db_index=True, max_length=100)
     dimension = models.CharField('Единицы измерения', max_length=15)
 
     class Meta:
