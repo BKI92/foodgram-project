@@ -48,7 +48,7 @@ def my_follow(request, username):
     page = paginator.get_page(page_number)
     return render(
         request,
-        template_name='MyFollow.html',
+        template_name='myFollow.html',
         context={
             'visible': VISIBLE_RECIPES,
             'page': page,
@@ -82,7 +82,7 @@ def new_recipe(request):
         form.add_error(None, 'Обязательное поле.')
     return render(
         request,
-        template_name='FormRecipe.html',
+        template_name='formRecipe.html',
         context={
             'form': form,
         }
