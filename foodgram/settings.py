@@ -33,7 +33,7 @@ SITE_ID = 5
 DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', '178.154.254.140',
-                 'www.pretty-food.tk', 'www.pretty-food.tk']
+                 'pretty-food.tk', 'www.pretty-food.tk']
 # Application definition
 
 INSTALLED_APPS = [
