@@ -1,7 +1,9 @@
 
-API Foodgram-project
+# Foodgram-project
 Сервис для создания вкусных рецептов.
-Доступен по адресу http://178.154.254.140/
+Доступен по адресу 
+http://pretty-food.tk/
+(http://178.154.254.140/)
 
 # Getting Started
 На сервер переместите в корень  папку nginx, docker-compose.yaml.
@@ -28,7 +30,7 @@ API Foodgram-project
  - выходим из оболочки quit()
  - загружаем данные в базу данных python3 manage.py loaddata dump.json
  - создаем администратора <python manage.py createsuperuser>
- - заходим по адресу your_domain/admin/ и создаем flatpages
+ - заходим по адресу pretty-food.tk/admin/ и создаем flatpages
 
 # Built With
 Django v3.1.3
