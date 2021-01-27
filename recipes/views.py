@@ -200,7 +200,7 @@ def send_pdf(request):
             my_history.recipes.add(recipe)
         my_shop_list.recipes.clear()
     return FileResponse(buffer, as_attachment=True,
-                        filename=f'shoplist_{date_str}')
+                        filename=f'shoplist_{date_str}.pdf')
 
 
 def author_recipes(request, author):
