@@ -1,0 +1,8 @@
+.button_style_red {
+    background: #ff0000;
+    color: #FFFFFF;
+    transition: background 0.2s;
+}
+.button_style_red:hover {
+    background: #DC143C;
+}
