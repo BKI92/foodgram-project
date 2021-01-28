@@ -38,6 +38,8 @@
             {% endfor %}
         </ul>
         <a {% if recipes %} href="{% url 'shop_list_send_pdf' %}" {% endif %}><button class="button button_style_blue">Скачать список</button></a>
+        <a {% if recipes %} href="{% url 'shop_list_delete_all' %}" {% endif %}><button class="button button_new button_style_red">Удалить список</button></a>
+
     </div>
     {% if page.has_other_pages %}
         {% include "includes/paginator.html" with items=page paginator=paginator%}
