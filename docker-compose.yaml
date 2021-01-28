@@ -20,7 +20,7 @@ services:
 
   nginx:
     restart: always
-    build: ./nginx
+    image: library/nginx:1.18
     ports:
       - 80:80
     volumes:
