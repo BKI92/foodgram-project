@@ -24,6 +24,8 @@ urlpatterns = [
     path("shop_list/delete/<int:recipe_id>/", views.shop_list_delete,
          name="shop_list_delete"),
     path("shop_list/get_pdf/", views.send_pdf, name="shop_list_send_pdf"),
+    path("shop_list/delete_all/", views.shop_list_delete_all,
+         name="shop_list_delete_all"),
 
     path("history/", views.history_view, name="history_view"),
     path("history/<int:history_id>/", views.recover_shop_list,
