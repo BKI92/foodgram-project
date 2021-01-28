@@ -137,7 +137,8 @@ def delete_recipe(request, recipe_id):
 def favorite(request):
     search = request.GET.getlist('search')
 
-    fav_recipes_ids = Favorite.objects.values_list('id', flat=True)
+    fav_recipes_ids = Favorite.objects.get_or_create(
+        user=request.user)[0].recipes.values_list('id', flat=True)
     favorite_recipes = Recipe.objects.filter(id__in=fav_recipes_ids)
 
     tags = Tag.objects.all()
@@ -336,7 +337,7 @@ def get_ingredients(request):
 @login_required
 def add_favorites(request):
     if request.method == "POST":
-        recipe_id = json.loads(request.body).get('id')
+        recipe_id = int(json.loads(request.body).get('id'))
         recipe = get_object_or_404(Recipe, id=recipe_id)
         my_favorite = Favorite.objects.get_or_create(user=request.user)[0]
         my_favorite.recipes.add(recipe)
