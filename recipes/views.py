@@ -186,6 +186,13 @@ def shop_list_delete(request, recipe_id):
     return redirect('shop_list')
 
 
+def shop_list_delete_all(request):
+    my_shop_list = get_object_or_404(ShopList, user=request.user)
+    if my_shop_list.recipes:
+        my_shop_list.recipes.clear()
+        return redirect('shop_list')
+
+
 @login_required
 def send_pdf(request):
     my_shop_list = get_object_or_404(ShopList, user=request.user)
@@ -199,7 +206,6 @@ def send_pdf(request):
         my_history = History.objects.create(user=request.user)
         for recipe in recipes:
             my_history.recipes.add(recipe)
-        my_shop_list.recipes.clear()
     return FileResponse(buffer, as_attachment=True,
                         filename=f'shoplist_{date_str}.pdf')
 
