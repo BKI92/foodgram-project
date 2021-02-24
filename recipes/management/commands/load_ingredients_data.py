@@ -19,4 +19,3 @@ class Command(BaseCommand):
                                                      dimension=dimension)
                 except Exception as exc:
                     print(f'В строке {row} ошибка {exc}.')
-
