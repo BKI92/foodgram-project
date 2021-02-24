@@ -24,7 +24,7 @@ jobs:
         run: flake8 --exclude users/migrations,foodgram/settings.py,foodgram/urls.py
 
 
-  build_and_push_to_docker_hub:
+  push_to_docker_hub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     needs: tests
@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: konstantin01/foodgram-project:v1.1
+          tags: konstantin01/foodgram-project:v1
   
   deploy:
     runs-on: ubuntu-latest
