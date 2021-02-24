@@ -69,9 +69,10 @@ def new_recipe(request):
             tag = get_object_or_404(Tag, id=tag_id)
             recipe.tags.add(tag)
 
-        for title, amount in ingredients.items():
+        for ing_id, values in ingredients.items():
+            title, amount, units = values
             ingredient = Ingredient.objects.get_or_create(
-                title=title, dimension='шт')[0]
+                title=title, dimension=units)[0]
             new_ingredient = IngredientAmount.objects.get_or_create(
                 ingredient=ingredient,
                 amount=amount)[0]
@@ -105,9 +106,10 @@ def change_recipe(request, recipe_id):
     if form.is_valid():
         form.save()
         recipe.ingredients.clear()
-        for title, amount in ingredients.items():
+        for ing_id, values in ingredients.items():
+            title, amount, units = values
             ingredient = Ingredient.objects.get_or_create(
-                title=title, dimension='шт.')[0]
+                title=title, dimension=units)[0]
             new_ingredient = IngredientAmount.objects.get_or_create(
                 ingredient=ingredient,
                 amount=amount)[0]
