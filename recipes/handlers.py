@@ -30,7 +30,7 @@ def generate_tag_links(tags_list):
                 [f'search={new_tag}' for new_tag in tags_list if
                  new_tag != tag])
             if not links[tag]:
-                links[tag] = f'search= '
+                links[tag] = 'search= '
         else:
             links[tag] = '&'.join(
                 [f'search={new_tag}' for new_tag in default_slugs if
