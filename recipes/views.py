@@ -107,12 +107,15 @@ def change_recipe(request, recipe_id):
         form.save()
         recipe.ingredients.clear()
         for ing_id, values in ingredients.items():
-            title, amount, units = values
-            ingredient = Ingredient.objects.get_or_create(
-                title=title, dimension=units)[0]
-            new_ingredient = IngredientAmount.objects.get_or_create(
-                ingredient=ingredient,
-                amount=amount)[0]
+            title, *specifications = values
+            if specifications:
+                ingredient = Ingredient.objects.get_or_create(
+                    title=title, dimension=specifications[1])[0]
+                new_ingredient = IngredientAmount.objects.get_or_create(
+                    ingredient=ingredient, amount=specifications[0])[0]
+            else:
+                new_ingredient = IngredientAmount.objects.get_or_create(
+                    id=ing_id)[0]
             recipe.ingredients.add(new_ingredient)
 
         return redirect('recipe_view', recipe_id=recipe_id)
