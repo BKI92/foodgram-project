@@ -17,18 +17,18 @@ http://pretty-food.tk/
 - DB_PORT=5432
 
 
-Запуск проекта выполняется командой <docker-compose up --build -d>
+Запуск проекта выполняется командой `docker-compose up --build -d`
  
 Далее необходимо выполнить следующий шаги
- - открываем терминал в контейнере web <docker exec -it <container_id> bash>
- - миграция <python manage.py migrate>
- - создаем необходимые таблицы python3 manage.py migrate --run-syncdb
- - заходим в оболочку джанго python3 manage.py shell
- - импортируем ContentType from django.contrib.contenttypes.models import ContentType
- - удаляем ContentType.objects.all().delete()
- - выходим из оболочки quit()
- - загружаем данные в базу данных python3 manage.py loaddata dump.json
- - создаем администратора <python manage.py createsuperuser>
+ - открываем терминал в контейнере web `docker exec -it <container_id> bash`
+ - миграция `python manage.py migrate`
+ - создаем необходимые таблицы `python3 manage.py migrate --run-syncdb`
+ - заходим в оболочку джанго `python3 manage.py shell`
+ - импортируем `ContentType from django.contrib.contenttypes.models import ContentType`
+ - удаляем `ContentType.objects.all().delete()`
+ - выходим из оболочки `quit()`
+ - загружаем данные в базу данных `python3 manage.py loaddata dump.json`
+ - создаем администратора `python manage.py createsuperuser`
  - заходим по адресу pretty-food.tk/admin/ и создаем flatpages
 
 # Built With
