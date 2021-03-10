@@ -3,7 +3,6 @@
 Сервис для создания вкусных рецептов.
 Доступен по адресу 
 http://pretty-food.tk/
-(http://178.154.254.140/)
 
 # Getting Started
 На сервер переместите в корень  папку nginx, docker-compose.yaml.
