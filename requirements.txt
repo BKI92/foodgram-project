@@ -17,6 +17,6 @@ pytz==2020.4
 reportlab==3.5.56
 six==1.15.0
 sorl-thumbnail==12.6.3
-sqlparse==0.4.1
+sqlparse==0.4.2
 typing-extensions==3.7.4.3
 zipp==3.4.0
